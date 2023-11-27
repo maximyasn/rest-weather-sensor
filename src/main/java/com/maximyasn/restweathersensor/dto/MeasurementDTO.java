@@ -1,8 +1,7 @@
 package com.maximyasn.restweathersensor.dto;
 
 import com.maximyasn.restweathersensor.domain.Sensor;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,13 +11,14 @@ import java.math.BigDecimal;
 @Setter
 public class MeasurementDTO {
 
-    @NotEmpty(message = "Value must not be empty!")
-    @Size(min = -100, max = 100, message = "Value should be between -100 and 100 degrees!")
+    @DecimalMin(value = "-100.0", message = "Temperature must be higher than -100")
+    @DecimalMax(value = "100.0", message = "Temperature must be lower than 100")
+    @Digits(integer = 3, fraction = 2, message = "Temperature can have 3 digs on left side and 2 on right side")
     private BigDecimal value;
 
-    @NotEmpty(message = "Rain status should be declared!")
+    @NotNull(message = "Rain status should be declared!")
     private Boolean raining;
 
-    @NotEmpty(message = "Source should be declared!")
-    private Sensor sensor;
+    @NotNull(message = "Source should be declared!")
+    private SensorDTO sensor;
 }

@@ -13,7 +13,4 @@ public class SensorDTO {
     @Size(min = 2, max = 30, message = "Name must contain 2-30 symbols")
     private String name;
 
-    @NotEmpty(message = "Location must not be empty!")
-    @Size(min = 5, max = 100, message = "Location must contain 5-100 symbols")
-    private String location;
 }

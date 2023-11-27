@@ -4,13 +4,14 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Data
 @NoArgsConstructor
 @Entity
 @Table(name = "sensor", schema = "sensor")
-public class Sensor {
+public class Sensor implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,8 +19,6 @@ public class Sensor {
 
     private String name;
 
-    private String location;
-
-    @OneToMany(mappedBy = "sensorName")
+    @OneToMany(mappedBy = "sensor")
     private List<Measurement> measurements;
 }
